@@ -1,0 +1,32 @@
+{
+  "name": "roblox-styling-language",
+  "displayName": "Roblox Styling Language",
+  "description": "",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.94.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "rsml",
+      "aliases": ["RSML", "rsml"],
+      "extensions": [".rsml"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "rsml",
+      "scopeName": "source.rsml",
+      "path": "./syntaxes/rsml.tmLanguage.json"
+    }],
+    "semanticTokenScopes": [
+      {
+        "scopes": {
+          "templateType": ["entity.name.selector"]
+        }
+      }
+    ]
+  }
+}
