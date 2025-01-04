@@ -31,9 +31,6 @@
         "injectTo": ["source.luau"],
         "embeddedLanguages": {
           "meta.embedded.rsml": "rsml"
-        },
-        "tokenTypes": {
-          "meta.embedded.rsml": "other"
         }
       }
     ],
