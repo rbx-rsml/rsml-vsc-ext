@@ -7,25 +7,7 @@
 
 	"patterns": [
 		{
-			"include": "#comments"
-		},
-		{
-			"include": "#macros"
-		},
-		{
-			"include": "#declarations"
-		},
-		{
-			"include": "#selectors"
-		},
-		{
-			"include": "#data-types"
-		},
-		{
-			"include": "#variables"
-		},
-		{
-			"include": "#fields"
+			"include": "#scopes"
 		}
 	],
 	"repository": {
@@ -39,17 +21,66 @@
 					"include": "#strings"
 				},
 				{
-					"include": "#auto"
-				},
-				{
 					"include": "#numbers"
 				},
 				{
 					"include": "#colors"
+				},
+				{
+					"include": "#enums"
+				},
+				{
+					"include": "#asset_urls"
 				}
 			]
 		},
 
+		"scopes_no_selectors_and_properties": {
+			"patterns": [
+				{
+					"name": "keyword.control",
+					"match": "^!rsml\\b"
+				},
+		
+				{
+					"include": "#comments"
+				},
+				{
+					"include": "#macros"
+				},
+				{
+					"include": "#declarations"
+				},
+				{
+					"include": "#data-types"
+				},
+				{
+					"include": "#variables"
+				}
+			]
+		},
+
+		"scopes_no_selectors": {
+			"patterns": [
+				{
+					"include": "#properties"
+				},
+				{
+					"include": "#scopes_no_selectors_and_properties"
+				}
+			]
+		},
+
+		"scopes": {
+			"patterns": [
+				{
+					"include": "#scopes_no_selectors"
+				},
+				{
+					"include": "#selectors"
+				}
+			]
+		},
 
 		"comments": {
 			"patterns": [
@@ -100,7 +131,7 @@
 			]
 		},
 		"macro-arg": {
-			"match": "([a-zA-Z0-9]+)[\n\t ]*(?:\\:[\n\t ]*([a-zA-Z0-9]+)?)?[\n\t ]*(?:=[\n\t ]*(.+)[;,]?)?",
+			"match": "([a-zA-Z0-9]+)[\t ]*(?:\\:[\t ]*([a-zA-Z0-9]+)?)?[\t ]*(?:=[\t ]*(.+)[;,]?)?",
 			"captures": {
 				"1": {
 					"name": "variable.name"
@@ -118,27 +149,15 @@
 			}
 		},
 
-
 		"declarations": {
 			"name": "keyword.control",
 			"match": "@(derive|priority|macro)?"
 		},
 
-		
 		"selectors": {
-			"match": "(((::|:|#|.)?([^\n\t `+-/%^*\\(\\){}=]+)?[ \t]*[,;]? +)+)[ \t]*{",
-			"captures": {
-				"1": {
-					"patterns": [
-						{
-							"match": "[^,;]+",
-							"name": "entity.name.tag.css"
-						}
-					]
-				}
-			}
+			"match": "(#|\\.|:|::)?[a-zA-Z0-9]+",
+			"name": "entity.name.tag.css"
 		},
-
 
 		"tuples": {
 			"begin": "([a-zA-Z0-9]+)[ \t]*\\(",
@@ -150,11 +169,10 @@
 			},
 			"patterns": [
 				{
-					"include": "$self"
+					"include": "#scopes_no_selectors"
 				}
 			]
 		},
-
 
 		"strings": {
 			"patterns": [
@@ -188,7 +206,7 @@
 
 				{
 					"name": "string",
-					"match": "\"([^\n\"]*)\"?",
+					"match": "\"([^\"]*)\"?",
 					"captures": {
 						"1": {
 							"patterns": [
@@ -203,7 +221,7 @@
 
 				{
 					"name": "string",
-					"match": "'([^\n\"]*)'?",
+					"match": "'([^\"]*)'?",
 					"captures": {
 						"1": {
 							"patterns": [
@@ -214,6 +232,11 @@
 							]
 						}
 					}
+				},
+
+				{
+					"name": "string",
+					"match": "rbxassetid://[0-9]+"
 				}
 			]
 		},
@@ -223,20 +246,10 @@
       		"end": "\\}",
       		"patterns": [
         		{
-          			"include": "$self"
+          			"include": "#scopes_no_selectors"
         		}
       		]
 		},
-
-		"auto": {
-			"match": "(auto)[^A-Za-z0-9]",
-			"captures": {
-				"1": {
-					"name": "string"
-				}
-			}
-		},
-
 
 		"numbers": {
 			"patterns": [
@@ -247,12 +260,11 @@
 			]
 		},
 
-
 		"colors": {
 			"patterns": [
 				{
-					"name": "string",
-					"match": "#[0-9a-fA-F]+"
+					"match": "(#)(?:[0-9a-fA-F]{3,4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})\\b",
+					"name": "string"
 				},
 				{
 					"name": "string",
@@ -264,17 +276,99 @@
 				}
 			]
 		},
-		
 
+		"asset_urls": {
+			"patterns": [
+				{
+					"match": "rbxassetid://([0-9]*)",
+					"name": "string"
+				},
+
+				{
+					"match": "(rbxasset|rbxthumb|rbxgameasset|rbxhttp|rbxtemp|http|https)://([^ ]*)",
+					"name": "string"
+				}
+			]
+		},
+		
 		"variables": {
-			"name": "variable.other.constant",
-			"match": "\\$[^\n\t +-/%^*\\(\\){}=;]+"
+			"begin": "(\\$[a-zA-Z0-9]+)[ \t]*=",
+			"end": ";",
+			"beginCaptures": {
+				"1": {
+					"name": "variable.other.constant"
+				}
+			},
+			
+			"patterns": [
+				{
+					"include": "#comments"
+				},
+				{
+					"include": "#data-types"
+				},
+				{
+					"include": "#enum-shorthand"
+				},
+				{
+					"include": "#variable-reference"
+				}
+			]
+		},
+		"variable-reference": {
+			"match": "\\$[a-zA-Z0-9]+",
+			"name": "variable.other.constant"
 		},
 
+		"enums": {
+			"match": "(Enum)(((:|\\.)[a-zA-Z0-9]+)+)?",
+			"captures": {
+				"1": {
+					"name": "entity.name.type.enum"
+				},
+				"2": {
+					"patterns": [
+						{
+							"match": "[a-zA-Z0-9]+",
+							"name": "entity.name.type.enum"
+						}
+					]
+				}
+			}
+		},
 
-		"fields": {
-			"name": "variable.name",
-			"match": "[^\n\t +-/%^*\\(\\){}=;]+"
+		"enum-shorthand": {
+			"match": ":([a-zA-Z0-9]+)",
+			"captures": {
+				"1": {
+					"name": "entity.name.type.enum"
+				}
+			}
+		},
+
+		"properties": {
+			"begin": "([a-zA-Z0-9]+)[ \t]*=",
+			"end": ";",
+			"beginCaptures": {
+				"1": {
+					"name": "variable.name"
+				}
+			},
+			
+			"patterns": [
+				{
+					"include": "#comments"
+				},
+				{
+					"include": "#data-types"
+				},
+				{
+					"include": "#enum-shorthand"
+				},
+				{
+					"include": "#variable-reference"
+				}
+			]
 		}
 	},
 	"scopeName": "source.rsml"

@@ -1,0 +1,125 @@
+{
+    "scopeName": "rsml.luau",
+    "injectionSelector": "L:source.luau",
+    "patterns": [
+        {
+            "include": "#string"
+        }
+    ],
+    "repository": {
+        "string": {
+            "patterns": [
+                {
+                    "name": "meta.embedded.rsml",
+                    "begin": "\\[(=*)\\[([\t ]*!rsml)",
+                    "end": "\\]\\1\\]",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "string.other.multiline.luau"
+                        },
+                        "2": {
+                            "name": "keyword.control"
+                        }
+                    },
+                    "endCaptures": {
+                        "0": {
+                            "name": "string.other.multiline.luau"
+                        }
+                    },
+                    "patterns": [
+                        {
+                            "include": "source.luau#string_escape"
+                        },
+                        {
+                            "include": "source.rsml"
+                        }
+                    ]
+                },
+
+                {
+                    "name": "meta.embedded.rsml",
+                    "begin": "`([\t ]*!rsml)",
+                    "end": "`",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "string.other.multiline.luau"
+                        },
+                        "1": {
+                            "name": "keyword.control"
+                        }
+                    },
+                    "endCaptures": {
+                        "0": {
+                            "name": "string.other.multiline.luau"
+                        }
+                    },
+                    "patterns": [
+                        {
+                            "include": "source.luau#string_escape"
+                        },
+                        {
+                            "include": "source.luau#interpolated_string_expression"
+                        },
+                        {
+                            "include": "source.rsml"
+                        }
+                    ]
+                },
+
+                {
+                    "name": "meta.embedded.rsml",
+                    "begin": "\"([\t ]*!rsml)",
+                    "end": "\"",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "string.other.multiline.luau"
+                        },
+                        "1": {
+                            "name": "keyword.control"
+                        }
+                    },
+                    "endCaptures": {
+                        "0": {
+                            "name": "string.other.multiline.luau"
+                        }
+                    },
+                    "patterns": [
+                        {
+                            "include": "source.luau#string_escape"
+                        },
+                        {
+                            "include": "source.rsml"
+                        }
+                    ]
+                },
+                {
+                    "name": "meta.embedded.rsml",
+                    "begin": "'([\t ]*!rsml)",
+                    "end": "'",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "string.other.multiline.luau"
+                        },
+                        "2": {
+                            "name": "keyword.control"
+                        }
+                    },
+                    "endCaptures": {
+                        "0": {
+                            "name": "string.other.multiline.luau"
+                        }
+                    },
+                    "patterns": [
+                        {
+                            "include": "source.luau#string_escape"
+                        },
+                        {
+                            "include": "source.rsml"
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}
+  

@@ -10,17 +10,33 @@
     "Programming Languages"
   ],
   "contributes": {
-    "languages": [{
-      "id": "rsml",
-      "aliases": ["RSML", "rsml"],
-      "extensions": [".rsml"],
-      "configuration": "./language-configuration.json"
-    }],
-    "grammars": [{
-      "language": "rsml",
-      "scopeName": "source.rsml",
-      "path": "./syntaxes/rsml.tmLanguage.json"
-    }],
+    "languages": [
+      {
+        "id": "rsml",
+        "aliases": ["RSML", "rsml"],
+        "extensions": [".rsml"],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "rsml",
+        "scopeName": "source.rsml",
+        "path": "./syntaxes/rsml.tmLanguage.json"
+      },
+
+      {
+        "path": "./syntaxes/rsmlluau.tmLanguauge.json",
+        "scopeName": "rsml.luau",
+        "injectTo": ["source.luau"],
+        "embeddedLanguages": {
+          "meta.embedded.rsml": "rsml"
+        },
+        "tokenTypes": {
+          "meta.embedded.rsml": "other"
+        }
+      }
+    ],
     "semanticTokenScopes": [
       {
         "scopes": {
