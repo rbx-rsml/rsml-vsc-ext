@@ -9,6 +9,7 @@
   "categories": [
     "Programming Languages"
   ],
+  "repository": "https://github.com/rsmlang/rsml-vsc-ext",
   "contributes": {
     "languages": [
       {

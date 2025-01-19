@@ -155,8 +155,16 @@
 		},
 
 		"selectors": {
-			"match": "(#|\\.|:|::)?[a-zA-Z0-9]+",
-			"name": "entity.name.tag.css"
+			"patterns": [
+				{
+					"match": "(#|\\.|:|::)[a-zA-Z0-9]*",
+					"name": "entity.name.tag.css"
+				},
+				{
+					"match": "[a-zA-Z0-9]+",
+					"name": "entity.name.tag.css"
+				}
+			]
 		},
 
 		"tuples": {
@@ -293,7 +301,7 @@
 		
 		"variables": {
 			"begin": "(\\$([a-zA-Z0-9]+)?)[ \t]*=?",
-			"end": ";",
+			"end": ";|}",
 			"beginCaptures": {
 				"1": {
 					"name": "variable.other.constant"
@@ -348,7 +356,7 @@
 
 		"properties": {
 			"begin": "([a-zA-Z0-9]+)[ \t]*=",
-			"end": ";",
+			"end": ";|}",
 			"beginCaptures": {
 				"1": {
 					"name": "variable.name"
