@@ -1,7 +1,7 @@
 {
-  "name": "roblox-styling-language",
-  "displayName": "Roblox Styling Language",
-  "description": "",
+  "name": "roblox-style-markup-language",
+  "displayName": "Roblox Style Markup Language",
+  "description": "This extension adds syntax highlighting to `.rsml` files and strings prefixed with `!rsml` in `.luau` files.",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.94.0"
