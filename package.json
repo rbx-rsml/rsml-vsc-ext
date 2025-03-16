@@ -1,8 +1,10 @@
 {
   "name": "roblox-style-markup-language",
   "displayName": "Roblox Style Markup Language",
-  "description": "This extension adds syntax highlighting to `.rsml` files and strings prefixed with `!rsml` in `.luau` files.",
-  "version": "0.0.1",
+  "publisher": "rbx-rsml",
+  "description": "Adds syntax highlighting to `.rsml` files and strings prefixed with `!rsml` in `.luau` files.",
+  "icon": "icon.png",
+  "version": "0.0.3",
   "engines": {
     "vscode": "^1.94.0"
   },
@@ -15,6 +17,10 @@
       {
         "id": "rsml",
         "aliases": ["RSML", "rsml"],
+        "icon": {
+          "light": "icon.png",
+          "dark": "icon.png"
+        },
         "extensions": [".rsml"],
         "configuration": "./language-configuration.json"
       }
@@ -27,9 +33,18 @@
       },
 
       {
-        "path": "./syntaxes/rsmlluau.tmLanguauge.json",
+        "path": "./syntaxes/rsml-luau.tmLanguage.json",
         "scopeName": "rsml.luau",
         "injectTo": ["source.luau"],
+        "embeddedLanguages": {
+          "meta.embedded.rsml": "rsml"
+        }
+      },
+
+      {
+        "path": "./syntaxes/rsml-ts.tmLanguage.json",
+        "scopeName": "rsml.ts",
+        "injectTo": ["source.ts"],
         "embeddedLanguages": {
           "meta.embedded.rsml": "rsml"
         }
