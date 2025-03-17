@@ -4,7 +4,7 @@
   "publisher": "rbx-rsml",
   "description": "Adds syntax highlighting to `.rsml` files and strings prefixed with `!rsml` in `.luau` files.",
   "icon": "icon.png",
-  "version": "0.0.3",
+  "version": "0.0.6",
   "engines": {
     "vscode": "^1.94.0"
   },

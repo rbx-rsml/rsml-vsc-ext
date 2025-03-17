@@ -1,6 +1,6 @@
 {
     "scopeName": "rsml.ts",
-    "injectionSelector": "L:source.ts - comment",
+    "injectionSelector": "L:source.ts - comment - string",
     "patterns": [
         {
             "include": "#string"

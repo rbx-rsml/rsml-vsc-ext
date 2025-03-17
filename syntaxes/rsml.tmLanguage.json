@@ -316,12 +316,17 @@
 		"asset_urls": {
 			"patterns": [
 				{
-					"match": "rbxassetid://([0-9]*)",
+					"match": "rbxassetid://[0-9]*",
 					"name": "string"
 				},
 
 				{
-					"match": "(rbxasset|rbxthumb|rbxgameasset|rbxhttp|rbxtemp|http|https)://([^ ]*)",
+					"match": "contentid://[0-9]*",
+					"name": "string"
+				},
+
+				{
+					"match": "(rbxasset|rbxthumb|rbxgameasset|rbxhttp|rbxtemp|http|https)://([^) ]*)",
 					"name": "string"
 				}
 			]

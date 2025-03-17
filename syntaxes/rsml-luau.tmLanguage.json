@@ -1,6 +1,6 @@
 {
     "scopeName": "rsml.luau",
-    "injectionSelector": "L:source.luau - comment",
+    "injectionSelector": "L:source.luau - comment - string",
     "patterns": [
         {
             "include": "#string"
