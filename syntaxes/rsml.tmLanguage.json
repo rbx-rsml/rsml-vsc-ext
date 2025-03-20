@@ -196,6 +196,9 @@
 			"patterns": [
 				{
 					"include": "#scopes_no_selectors"
+				},
+				{
+					"include": "#enum-shorthand"
 				}
 			]
 		},
@@ -244,7 +247,21 @@
 
 				{
 					"name": "string",
-					"match": "(\"|')([^\\1]*)(\\1)",
+					"match": "\"([^\"]*)\"",
+					"captures": {
+						"1": {
+							"patterns": [
+								{ 
+									"name": "constant.character.escape",
+									"match": "\\\\"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "string",
+					"match": "'([^']*)'",
 					"captures": {
 						"1": {
 							"patterns": [
@@ -333,7 +350,7 @@
 		},
 		
 		"variables": {
-			"begin": "(\\$([a-zA-Z0-9]+)?)[ \t]*=?",
+			"begin": "(\\$([_a-zA-Z][_A-Za-z0-9]*)?)[ \t]*=?",
 			"end": ";|}|$",
 			"beginCaptures": {
 				"1": {
@@ -388,7 +405,7 @@
 		},
 
 		"properties": {
-			"begin": "([a-zA-Z0-9]+)[ \t]*=",
+			"begin": "([_a-zA-Z][_A-Za-z0-9]*)[ \t]*=",
 			"end": ";|}|$",
 			"beginCaptures": {
 				"1": {
