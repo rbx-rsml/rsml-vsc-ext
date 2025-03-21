@@ -374,7 +374,7 @@
 			]
 		},
 		"variable-reference": {
-			"match": "\\$[a-zA-Z0-9]*",
+			"match": "\\$([_a-zA-Z][_A-Za-z0-9]*)?",
 			"name": "variable.other.constant"
 		},
 
