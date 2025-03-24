@@ -338,11 +338,6 @@
 				},
 
 				{
-					"match": "contentid://[0-9]*",
-					"name": "string"
-				},
-
-				{
 					"match": "(rbxasset|rbxthumb|rbxgameasset|rbxhttp|rbxtemp|http|https)://([^) ]*)",
 					"name": "string"
 				}
