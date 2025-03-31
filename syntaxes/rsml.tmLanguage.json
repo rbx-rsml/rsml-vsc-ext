@@ -34,6 +34,9 @@
 				},
 				{
 					"include": "#booleans"
+				},
+				{
+					"include": "#nil"
 				}
 			]
 		},
@@ -211,6 +214,15 @@
 				},
 				{
 					"match": "false",
+					"name": "variable.other.constant"
+				}
+			]
+		},
+
+		"nil": {
+			"patterns": [
+				{
+					"match": "nil",
 					"name": "variable.other.constant"
 				}
 			]
