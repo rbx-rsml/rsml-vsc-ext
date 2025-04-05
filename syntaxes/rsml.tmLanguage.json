@@ -50,7 +50,10 @@
 					"include": "#macros"
 				},
 				{
-					"include": "#declarations"
+					"include": "#main-declarations"
+				},
+				{
+					"include": "#util-declaration"
 				},
 				{
 					"include": "#data-types"
@@ -79,6 +82,26 @@
 				},
 				{
 					"include": "#selectors"
+				}
+			]
+		},
+
+		"scopes_no_util-declaration": {
+			"patterns": [
+				{
+					"include": "#comments"
+				},
+				{
+					"include": "#macros"
+				},
+				{
+					"include": "#main-declarations"
+				},
+				{
+					"include": "#data-types"
+				},
+				{
+					"include": "#variables"
 				}
 			]
 		},
@@ -150,9 +173,9 @@
 			}
 		},
 
-		"declarations": {
-			"begin": "(@(derive|priority|name|util))",
-			"end": ";|}|$",
+		"main-declarations": {
+			"begin": "(@(derive|priority|name))",
+			"end": ";|}",
 			"beginCaptures": {
 				"1": {
 					"name": "keyword.control"
@@ -175,14 +198,45 @@
 			]
 		},
 
+		"util-declaration": {
+			"patterns": [{
+				"match": "@(util)?",
+				"name": "keyword.control"
+			},
+			{
+				"begin": "(@util)[ \t]([_a-zA-Z](-?[_a-zA-Z\\d])*)[ \t]{",
+				"end": ";|}|$",
+				"beginCaptures": {
+					"1": {
+						"name": "keyword.control"
+					}
+				},
+				
+				"patterns": [
+					{
+						"include": "#comments"
+					},
+					{
+						"include": "#data-types"
+					},
+					{
+						"include": "#enum-shorthand"
+					},
+					{
+						"include": "#variable-reference"
+					}
+				]
+			}]
+		},
+
 		"selectors": {
 			"patterns": [
 				{
-					"match": "(#|\\.|:|::)[a-zA-Z0-9]*",
+					"match": "(#|\\.|:|::)([_a-zA-Z](-?[_a-zA-Z\\d])*)?",
 					"name": "entity.name.tag.css"
 				},
 				{
-					"match": "[a-zA-Z0-9]+",
+					"match": "(([_a-zA-Z](-?[_a-zA-Z\\d])*))",
 					"name": "entity.name.tag.css"
 				}
 			]
@@ -355,9 +409,8 @@
 				}
 			]
 		},
-		
 		"variables": {
-			"begin": "(\\$([_a-zA-Z][_A-Za-z0-9]*)?)[ \t]*=?",
+			"begin": "(\\$([_a-zA-Z](-?[_a-zA-Z\\d])*)?)([ \t]*)(=?)",
 			"end": ";|}|$",
 			"beginCaptures": {
 				"1": {
@@ -412,7 +465,7 @@
 		},
 
 		"properties": {
-			"begin": "([_a-zA-Z][_A-Za-z0-9]*)[ \t]*=",
+			"begin": "([_a-zA-Z](-?[_a-zA-Z\\d])*)([ \t]*)*=",
 			"end": ";|}|$",
 			"beginCaptures": {
 				"1": {
