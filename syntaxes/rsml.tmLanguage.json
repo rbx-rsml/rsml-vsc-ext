@@ -151,7 +151,7 @@
 		},
 
 		"declarations": {
-			"begin": "(@(derive|priority|name))",
+			"begin": "(@(derive|priority|name|util))",
 			"end": ";|}|$",
 			"beginCaptures": {
 				"1": {
