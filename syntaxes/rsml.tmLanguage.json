@@ -50,10 +50,7 @@
 					"include": "#macros"
 				},
 				{
-					"include": "#main-declarations"
-				},
-				{
-					"include": "#util-declaration"
+					"include": "#declarations"
 				},
 				{
 					"include": "#data-types"
@@ -82,26 +79,6 @@
 				},
 				{
 					"include": "#selectors"
-				}
-			]
-		},
-
-		"scopes_no_util-declaration": {
-			"patterns": [
-				{
-					"include": "#comments"
-				},
-				{
-					"include": "#macros"
-				},
-				{
-					"include": "#main-declarations"
-				},
-				{
-					"include": "#data-types"
-				},
-				{
-					"include": "#variables"
 				}
 			]
 		},
@@ -173,60 +150,64 @@
 			}
 		},
 
-		"main-declarations": {
-			"begin": "(@(derive|priority|name))",
-			"end": ";|}",
-			"beginCaptures": {
-				"1": {
-					"name": "keyword.control"
-				}
-			},
-			
-			"patterns": [
-				{
-					"include": "#comments"
-				},
-				{
-					"include": "#data-types"
-				},
-				{
-					"include": "#enum-shorthand"
-				},
-				{
-					"include": "#variable-reference"
-				}
-			]
+		"templating": {
+			"match": "(\\[)((?:[_a-zA-Z](?:-?[_a-zA-Z\\d])*)?)(\\])",
+			"captures": {
+				"1": { "name": "variable.other.constant" },
+				"2": { "name": "storage.type" },
+				"3": { "name": "variable.other.constant" }
+			}
 		},
 
-		"util-declaration": {
-			"patterns": [{
-				"match": "@(util)?",
-				"name": "keyword.control"
-			},
-			{
-				"begin": "(@util)[ \t]([_a-zA-Z](-?[_a-zA-Z\\d])*)[ \t]{",
-				"end": ";|}|$",
-				"beginCaptures": {
-					"1": {
-						"name": "keyword.control"
-					}
+		"declarations": {
+			"patterns": [
+				{
+					"begin": "(@(derive|priority|name))",
+					"end": ";|}",
+					"beginCaptures": {
+						"1": {
+							"name": "keyword.control"
+						}
+					},
+					
+					"patterns": [
+						{
+							"include": "#comments"
+						},
+						{
+							"include": "#data-types"
+						},
+						{
+							"include": "#enum-shorthand"
+						},
+						{
+							"include": "#variable-reference"
+						}
+					]
 				},
-				
-				"patterns": [
-					{
-						"include": "#comments"
-					},
-					{
-						"include": "#data-types"
-					},
-					{
-						"include": "#enum-shorthand"
-					},
-					{
-						"include": "#variable-reference"
-					}
-				]
-			}]
+
+				{
+					"patterns": [{
+						"match": "(@util)[ \t]([-_A-Za-z\\d\\[\\] \t]+)",
+						"captures": {
+							"1": {
+								"name": "keyword.control"
+							},
+							"2": {
+								"patterns": [{
+									"include": "#templating"
+								}, {
+									"match": "[^\\[\\]]+",
+									"name": "entity.name.tag.css"
+								}]
+							}
+						}
+					}, {
+						"match": "@(util)?",
+						"name": "keyword.control"
+					}]
+				}
+			]
 		},
 
 		"selectors": {
@@ -430,6 +411,9 @@
 				},
 				{
 					"include": "#variable-reference"
+				},
+				{
+					"include": "#templating"
 				}
 			]
 		},
@@ -485,6 +469,9 @@
 				},
 				{
 					"include": "#variable-reference"
+				},
+				{
+					"include": "#templating"
 				}
 			]
 		}
