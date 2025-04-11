@@ -56,7 +56,10 @@
 					"include": "#data-types"
 				},
 				{
-					"include": "#variables"
+					"include": "#statics"
+				},
+				{
+					"include": "#attributes"
 				}
 			]
 		},
@@ -181,7 +184,10 @@
 							"include": "#enum-shorthand"
 						},
 						{
-							"include": "#variable-reference"
+							"include": "#static-reference"
+						},
+						{
+							"include": "#attribute-reference"
 						}
 					]
 				},
@@ -394,7 +400,8 @@
 				}
 			]
 		},
-		"variables": {
+
+		"attributes": {
 			"begin": "(\\$([_a-zA-Z](-?[_a-zA-Z\\d])*)?)([ \t]*)(=?)",
 			"end": ";|}|$",
 			"beginCaptures": {
@@ -414,16 +421,51 @@
 					"include": "#enum-shorthand"
 				},
 				{
-					"include": "#variable-reference"
+					"include": "#static-reference"
+				},
+				{
+					"include": "#attribute-reference"
 				},
 				{
 					"include": "#templating"
 				}
 			]
 		},
-		"variable-reference": {
+		"attribute-reference": {
 			"match": "\\$([_a-zA-Z][_A-Za-z0-9]*)?",
 			"name": "variable.other.constant"
+		},
+
+		"statics": {
+			"begin": "(\\$!([_a-zA-Z](-?[_a-zA-Z\\d])*)?)([ \t]*)(=?)",
+			"end": ";|}|$",
+			"beginCaptures": {
+				"1": {
+					"name": "storage.type"
+				}
+			},
+			
+			"patterns": [
+				{
+					"include": "#comments"
+				},
+				{
+					"include": "#data-types"
+				},
+				{
+					"include": "#enum-shorthand"
+				},
+				{
+					"include": "#static-reference"
+				},
+				{
+					"include": "#templating"
+				}
+			]
+		},
+		"static-reference": {
+			"match": "\\$!([_a-zA-Z][_A-Za-z0-9]*)?",
+			"name": "storage.type"
 		},
 
 		"enums": {
@@ -472,7 +514,10 @@
 					"include": "#enum-shorthand"
 				},
 				{
-					"include": "#variable-reference"
+					"include": "#static-reference"
+				},
+				{
+					"include": "#attribute-reference"
 				},
 				{
 					"include": "#templating"
