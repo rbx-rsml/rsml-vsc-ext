@@ -239,10 +239,19 @@
 			},
 			"patterns": [
 				{
-					"include": "#scopes_no_selectors"
+					"include": "#tuples"
+				},
+				{
+					"include": "#data-types"
 				},
 				{
 					"include": "#enum-shorthand"
+				},
+				{
+					"include": "#static-reference"
+				},
+				{
+					"include": "#attribute-reference"
 				}
 			]
 		},
