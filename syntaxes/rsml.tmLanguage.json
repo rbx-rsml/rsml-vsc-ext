@@ -55,10 +55,10 @@
 					"include": "#data-types"
 				},
 				{
-					"include": "#statics"
+					"include": "#static-attribute"
 				},
 				{
-					"include": "#macro-call"
+					"include": "#static-arg"
 				},
 				{
 					"include": "#attributes"
@@ -80,10 +80,47 @@
 		"scopes": {
 			"patterns": [
 				{
+					"include": "#macro-call"
+				},
+				{
 					"include": "#scopes_no_selectors"
 				},
 				{
 					"include": "#selectors"
+				}
+			]
+		},
+
+		"assignment-no-dynamics": {
+			"patterns": [
+				{
+					"include": "#comments"
+				},
+				{
+					"include": "#data-types"
+				},
+				{
+					"include": "#enum-shorthand"
+				},
+				{
+					"include": "#static-reference"
+				},
+				{
+					"include": "#static-arg"
+				},
+				{
+					"include": "#macro-call"
+				}
+			]
+		},
+
+		"assignment": {
+			"patterns": [
+				{
+					"include": "#assignment-no-dynamics"
+				},
+				{
+					"include": "#attribute-reference"
 				}
 			]
 		},
@@ -118,13 +155,12 @@
 					},
 					"patterns": [
 						{
-							"match": "[_a-zA-Z](-?[_a-zA-Z\\d])*",
-							"name": "storage.type"
+							"include": "#static-arg"
 						}
 					]
 				},
 				{
-					"match": "(@macro)[ \t]*([a-zA-Z0-9]+)",
+					"match": "(@macro)[ \t]*([_a-zA-Z](-?[_a-zA-Z\\d])*)",
 					"captures": {
 						"1": {
 							"name": "keyword.control"
@@ -137,13 +173,24 @@
 			]
 		},
 
-		"templating": {
-			"match": "(\\[)[\t ]*((?:[_a-zA-Z](?:-?[_a-zA-Z\\d])*)?)[\t ]*(\\])",
-			"captures": {
-				"1": { "name": "variable.other.constant" },
-				"2": { "name": "storage.type" },
-				"3": { "name": "variable.other.constant" }
-			}
+		"macro-call": {
+			"begin": "(([_a-zA-Z](-?[_a-zA-Z\\d])*)?!)[ \t]*\\(",
+			"end": "\\)",
+			"beginCaptures": {
+				"1": {
+					"name": "storage.type"
+				}
+			},
+			"patterns": [
+				{
+					"include": "$self"
+				}
+			]
+		},
+
+		"static-arg": {
+			"match": "\\!(([_a-zA-Z](-?[_a-zA-Z\\d])*)?)",
+			"name": "storage.type"
 		},
 
 		"declarations": {
@@ -184,9 +231,7 @@
 								"name": "keyword.control"
 							},
 							"2": {
-								"patterns": [{
-									"include": "#templating"
-								}, {
+								"patterns": [ {
 									"match": "[^\\[\\]]+",
 									"name": "entity.name.tag.css"
 								}]
@@ -225,51 +270,7 @@
 					},
 					"patterns": [
 						{
-							"include": "#tuples"
-						},
-						{
-							"include": "#data-types"
-						},
-						{
-							"include": "#enum-shorthand"
-						},
-						{
-							"include": "#static-reference"
-						},
-						{
-							"include": "#attribute-reference"
-						},
-						{
-							"include": "#templating"
-						}
-					]
-				},
-				{
-					"begin": "([a-zA-Z0-9]+!)[ \t]*\\(",
-					"end": "\\)",
-					"beginCaptures": {
-						"1": {
-							"name": "storage.type"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#tuples"
-						},
-						{
-							"include": "#data-types"
-						},
-						{
-							"include": "#enum-shorthand"
-						},
-						{
-							"include": "#static-reference"
-						},
-						{
-							"include": "#attribute-reference"
-						},
-						{
-							"include": "#templating"
+							"include": "$self"
 						}
 					]
 				}
@@ -311,7 +312,6 @@
             			}
 					]
 				},
-
 				
 				{
 					"name": "string",
@@ -385,6 +385,17 @@
 		"numbers": {
 			"patterns": [
 				{
+					"match": "(\\d[\\d_]*)?\\.((\\d[\\d_]*)(px|%)?)",
+					"captures": {
+						"1": {
+							"name": "constant.numeric"
+						},
+						"2": {
+							"name": "constant.numeric"
+						}
+					}
+				},
+				{
 					"name": "constant.numeric",
 					"match": "\\d[\\d_]*(px|%)?"
 				}
@@ -441,22 +452,7 @@
 			
 			"patterns": [
 				{
-					"include": "#comments"
-				},
-				{
-					"include": "#data-types"
-				},
-				{
-					"include": "#enum-shorthand"
-				},
-				{
-					"include": "#static-reference"
-				},
-				{
-					"include": "#attribute-reference"
-				},
-				{
-					"include": "#templating"
+					"include": "#assignment"
 				}
 			]
 		},
@@ -465,7 +461,7 @@
 			"name": "variable.other.constant"
 		},
 
-		"statics": {
+		"static-attribute": {
 			"begin": "(\\$!([_a-zA-Z](-?[_a-zA-Z\\d])*)?)([ \t]*)(=?)",
 			"end": ";|}|$",
 			"beginCaptures": {
@@ -476,29 +472,12 @@
 			
 			"patterns": [
 				{
-					"include": "#comments"
-				},
-				{
-					"include": "#data-types"
-				},
-				{
-					"include": "#enum-shorthand"
-				},
-				{
-					"include": "#static-reference"
-				},
-				{
-					"include": "#templating"
+					"include": "#assignment-no-dynamics"
 				}
 			]
 		},
 		"static-reference": {
 			"match": "\\$!([_a-zA-Z][_A-Za-z0-9]*)?",
-			"name": "storage.type"
-		},
-
-		"macro-call": {
-			"match": "(([_a-zA-Z](-?[_a-zA-Z\\d])*)?)!",
 			"name": "storage.type"
 		},
 
@@ -539,22 +518,7 @@
 			
 			"patterns": [
 				{
-					"include": "#comments"
-				},
-				{
-					"include": "#data-types"
-				},
-				{
-					"include": "#enum-shorthand"
-				},
-				{
-					"include": "#static-reference"
-				},
-				{
-					"include": "#attribute-reference"
-				},
-				{
-					"include": "#templating"
+					"include": "#assignment"
 				}
 			]
 		}
