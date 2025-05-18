@@ -113,7 +113,7 @@
 							"name": "keyword.control"
 						},
 						"2": {
-							"name": "entity.name.function"
+							"name": "storage.type"
 						}
 					},
 					"patterns": [
@@ -130,7 +130,7 @@
 							"name": "keyword.control"
 						},
 						"2": {
-							"name": "entity.name.tag.css"
+							"name": "storage.type"
 						}
 					}
 				}
@@ -245,11 +245,11 @@
 					]
 				},
 				{
-					"begin": "(![a-zA-Z0-9]+)?[ \t]*\\(",
+					"begin": "([a-zA-Z0-9]+!)[ \t]*\\(",
 					"end": "\\)",
 					"beginCaptures": {
 						"1": {
-							"name": "entity.name.function"
+							"name": "storage.type"
 						}
 					},
 					"patterns": [
@@ -498,8 +498,8 @@
 		},
 
 		"macro-call": {
-			"match": "(!([_a-zA-Z](-?[_a-zA-Z\\d])*)?)",
-			"name": "entity.name.function"
+			"match": "(([_a-zA-Z](-?[_a-zA-Z\\d])*)?)!",
+			"name": "storage.type"
 		},
 
 		"enums": {
