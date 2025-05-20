@@ -49,16 +49,16 @@
 					"include": "#macros"
 				},
 				{
-					"include": "#macro-call"
+					"include": "#data-types"
 				},
 				{
 					"include": "#static-arg"
 				},
 				{
-					"include": "#declarations"
+					"include": "#macro-call"
 				},
 				{
-					"include": "#data-types"
+					"include": "#declarations"
 				},
 				{
 					"include": "#static-attribute"
@@ -192,20 +192,6 @@
 				{
 					"match": "(([_a-zA-Z](-?[_a-zA-Z\\d])*)?!)",
 					"name": "storage.type"
-				},
-				{
-					"begin": "(!([_a-zA-Z](-?[_a-zA-Z\\d])*)?)[ \t]*\\(",
-					"end": "\\)",
-					"beginCaptures": {
-						"1": {
-							"name": "none"
-						}
-					},
-					"patterns": [
-						{
-							"include": "$self"
-						}
-					]
 				}
 			]
 		},
@@ -283,10 +269,13 @@
 		"tuples": {
 			"patterns": [
 				{
-					"begin": "([a-zA-Z0-9]+)?[ \t]*\\(",
+					"begin": "(!?)([a-zA-Z0-9]+)?[ \t]*\\(",
 					"end": "\\)",
 					"beginCaptures": {
 						"1": {
+							"name": "storage.type"
+						},
+						"2": {
 							"name": "support.class"
 						}
 					},
