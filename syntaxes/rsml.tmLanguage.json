@@ -174,16 +174,24 @@
 		},
 
 		"macro-call": {
-			"begin": "(([_a-zA-Z](-?[_a-zA-Z\\d])*)?!)[ \t]*\\(",
-			"end": "\\)",
-			"beginCaptures": {
-				"1": {
-					"name": "storage.type"
-				}
-			},
 			"patterns": [
 				{
-					"include": "$self"
+					"begin": "(([_a-zA-Z](-?[_a-zA-Z\\d])*)?!)[ \t]*\\(",
+					"end": "\\)",
+					"beginCaptures": {
+						"1": {
+							"name": "storage.type"
+						}
+					},
+					"patterns": [
+						{
+							"include": "$self"
+						}
+					]
+				},
+				{
+					"match": "(([_a-zA-Z](-?[_a-zA-Z\\d])*)?!)",
+					"name": "storage.type"
 				}
 			]
 		},
