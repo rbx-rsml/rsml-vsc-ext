@@ -49,6 +49,9 @@
 					"include": "#macros"
 				},
 				{
+					"include": "#static-arg"
+				},
+				{
 					"include": "#declarations"
 				},
 				{
@@ -56,9 +59,6 @@
 				},
 				{
 					"include": "#static-attribute"
-				},
-				{
-					"include": "#static-arg"
 				},
 				{
 					"include": "#attributes"
@@ -79,9 +79,6 @@
 
 		"scopes": {
 			"patterns": [
-				{
-					"include": "#macro-call"
-				},
 				{
 					"include": "#scopes_no_selectors"
 				},
@@ -197,7 +194,7 @@
 		},
 
 		"static-arg": {
-			"match": "\\!(([_a-zA-Z](-?[_a-zA-Z\\d])*)?)",
+			"match": "!(([_a-zA-Z](-?[_a-zA-Z\\d])*)?)",
 			"name": "storage.type"
 		},
 
