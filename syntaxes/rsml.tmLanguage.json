@@ -49,10 +49,10 @@
 					"include": "#macros"
 				},
 				{
-					"include": "#static-arg"
+					"include": "#macro-call"
 				},
 				{
-					"include": "#macro-call"
+					"include": "#static-arg"
 				},
 				{
 					"include": "#declarations"
@@ -106,10 +106,10 @@
 					"include": "#static-reference"
 				},
 				{
-					"include": "#static-arg"
+					"include": "#macro-call"
 				},
 				{
-					"include": "#macro-call"
+					"include": "#static-arg"
 				}
 			]
 		},
@@ -192,6 +192,20 @@
 				{
 					"match": "(([_a-zA-Z](-?[_a-zA-Z\\d])*)?!)",
 					"name": "storage.type"
+				},
+				{
+					"begin": "(!([_a-zA-Z](-?[_a-zA-Z\\d])*)?)[ \t]*\\(",
+					"end": "\\)",
+					"beginCaptures": {
+						"1": {
+							"name": "none"
+						}
+					},
+					"patterns": [
+						{
+							"include": "$self"
+						}
+					]
 				}
 			]
 		},

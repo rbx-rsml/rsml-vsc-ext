@@ -4,7 +4,7 @@
   "publisher": "rbx-rsml",
   "description": "Adds syntax highlighting to `.rsml` files. Also adds highlighting to luau and typscript strings prefixed with the `--!rsml` (or `--[=*[rsml!]=*]`) sigil.",
   "icon": "icon.png",
-  "version": "0.0.22",
+  "version": "0.0.23",
   "engines": {
     "vscode": "^1.94.0"
   },
