@@ -52,7 +52,7 @@
 					"include": "#data-types"
 				},
 				{
-					"include": "#static-arg"
+					"include": "#parameter"
 				},
 				{
 					"include": "#macro-call"
@@ -109,7 +109,7 @@
 					"include": "#macro-call"
 				},
 				{
-					"include": "#static-arg"
+					"include": "#parameter"
 				}
 			]
 		},
@@ -155,7 +155,7 @@
 					},
 					"patterns": [
 						{
-							"include": "#static-arg"
+							"include": "#parameter"
 						}
 					]
 				},
@@ -196,8 +196,8 @@
 			]
 		},
 
-		"static-arg": {
-			"match": "!(([_a-zA-Z](-?[_a-zA-Z\\d])*)?)",
+		"parameter": {
+			"match": "&(([_a-zA-Z](-?[_a-zA-Z\\d])*)?)",
 			"name": "storage.type"
 		},
 
