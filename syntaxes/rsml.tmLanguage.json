@@ -52,6 +52,9 @@
 					"include": "#static-arg"
 				},
 				{
+					"include": "#macro-call"
+				},
+				{
 					"include": "#declarations"
 				},
 				{
