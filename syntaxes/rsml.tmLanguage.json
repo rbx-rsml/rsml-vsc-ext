@@ -29,6 +29,9 @@
 					"include": "#enums"
 				},
 				{
+					"include": "#enum-shorthand"
+				},
+				{
 					"include": "#asset_urls"
 				},
 				{
@@ -185,6 +188,9 @@
 					},
 					"patterns": [
 						{
+							"include": "#data-types"
+						},
+						{
 							"include": "$self"
 						}
 					]
@@ -282,6 +288,9 @@
 					"patterns": [
 						{
 							"include": "$self"
+						},
+						{
+							"include": "#data-types"
 						}
 					]
 				}
