@@ -86,10 +86,10 @@
 		"scopes": {
 			"patterns": [
 				{
-					"include": "#scopes_no_selectors"
+					"include": "#selectors"
 				},
 				{
-					"include": "#selectors"
+					"include": "#scopes_no_selectors"
 				}
 			]
 		},
