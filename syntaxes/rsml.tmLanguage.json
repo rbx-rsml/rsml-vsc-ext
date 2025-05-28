@@ -194,6 +194,12 @@
 					},
 					"patterns": [
 						{
+							"include": "#properties"
+						},
+						{
+							"include": "#selectors"
+						},
+						{
 							"include": "#data-types"
 						},
 						{
@@ -292,6 +298,12 @@
 						}
 					},
 					"patterns": [
+						{
+							"include": "#properties"
+						},
+						{
+							"include": "#selectors"
+						},
 						{
 							"include": "#data-types"
 						},
