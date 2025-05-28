@@ -86,6 +86,12 @@
 		"scopes": {
 			"patterns": [
 				{
+					"include": "#macro-call"
+				},
+				{
+					"include": "#properties"
+				},
+				{
 					"include": "#selectors"
 				},
 				{
@@ -287,10 +293,10 @@
 					},
 					"patterns": [
 						{
-							"include": "$self"
+							"include": "#data-types"
 						},
 						{
-							"include": "#data-types"
+							"include": "$self"
 						}
 					]
 				}
