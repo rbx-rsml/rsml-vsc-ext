@@ -299,6 +299,9 @@
 					},
 					"patterns": [
 						{
+							"include": "#enum-shorthand"
+						},
+						{
 							"include": "#properties"
 						},
 						{
