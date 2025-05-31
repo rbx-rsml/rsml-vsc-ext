@@ -194,6 +194,15 @@
 					},
 					"patterns": [
 						{
+							"include": "#enum-shorthand"
+						},
+						{
+							"include": "#tuples"
+						},
+						{
+							"include": "#macro-call"
+						},
+						{
 							"include": "#properties"
 						},
 						{
@@ -303,6 +312,9 @@
 						},
 						{
 							"include": "#tuples"
+						},
+						{
+							"include": "#macro-call"
 						},
 						{
 							"include": "#properties"
