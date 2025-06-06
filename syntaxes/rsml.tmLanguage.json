@@ -39,6 +39,15 @@
 				},
 				{
 					"include": "#nil"
+				},
+				{
+					"include": "#static-reference"
+				},
+				{
+					"include": "#attribute-reference"
+				},
+				{
+					"include": "#static-arg"
 				}
 			]
 		},
@@ -192,29 +201,33 @@
 							"name": "storage.type"
 						}
 					},
-					"patterns": [
-						{
-							"include": "#enum-shorthand"
-						},
-						{
-							"include": "#tuples"
-						},
-						{
-							"include": "#macro-call"
-						},
-						{
-							"include": "#properties"
-						},
-						{
-							"include": "#selectors"
-						},
-						{
-							"include": "#data-types"
-						},
-						{
-							"include": "$self"
+					"captures": {
+						"0": {
+							"patterns": [
+								{
+									"include": "#enum-shorthand"
+								},
+								{
+									"include": "#tuples"
+								},
+								{
+									"include": "#macro-call"
+								},
+								{
+									"include": "#properties"
+								},
+								{
+									"include": "#selectors"
+								},
+								{
+									"include": "#data-types"
+								},
+								{
+									"include": "$self"
+								}
+							]
 						}
-					]
+					}
 				},
 				{
 					"match": "(([_a-zA-Z](-?[_a-zA-Z\\d])*)?!)",
@@ -306,6 +319,7 @@
 							"name": "support.class"
 						}
 					},
+	
 					"patterns": [
 						{
 							"include": "#enum-shorthand"
@@ -324,11 +338,9 @@
 						},
 						{
 							"include": "#data-types"
-						},
-						{
-							"include": "$self"
 						}
 					]
+					
 				}
 			]
 		},
