@@ -17,6 +17,9 @@
 					"include": "#tuples"
 				},
 				{
+					"include": "#macro-call"
+				},
+				{
 					"include": "#strings"
 				},
 				{
@@ -201,33 +204,20 @@
 							"name": "storage.type"
 						}
 					},
-					"captures": {
-						"0": {
-							"patterns": [
-								{
-									"include": "#enum-shorthand"
-								},
-								{
-									"include": "#tuples"
-								},
-								{
-									"include": "#macro-call"
-								},
-								{
-									"include": "#properties"
-								},
-								{
-									"include": "#selectors"
-								},
-								{
-									"include": "#data-types"
-								},
-								{
-									"include": "$self"
-								}
-							]
+					"patterns": [
+						{
+							"include": "#data-types"
+						},
+						{
+							"include": "#properties"
+						},
+						{
+							"include": "#selectors"
+						},
+						{
+							"include": "$self"
 						}
-					}
+					]
 				},
 				{
 					"match": "(([_a-zA-Z](-?[_a-zA-Z\\d])*)?!)",
@@ -321,21 +311,6 @@
 					},
 	
 					"patterns": [
-						{
-							"include": "#enum-shorthand"
-						},
-						{
-							"include": "#tuples"
-						},
-						{
-							"include": "#macro-call"
-						},
-						{
-							"include": "#properties"
-						},
-						{
-							"include": "#selectors"
-						},
 						{
 							"include": "#data-types"
 						}
