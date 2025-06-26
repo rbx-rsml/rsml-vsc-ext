@@ -50,7 +50,7 @@
 					"include": "#attribute-reference"
 				},
 				{
-					"include": "#static-arg"
+					"include": "#parameter"
 				}
 			]
 		},
@@ -64,6 +64,12 @@
 					"include": "#macros"
 				},
 				{
+					"include": "#static-attribute"
+				},
+				{
+					"include": "#attributes"
+				},
+				{
 					"include": "#data-types"
 				},
 				{
@@ -74,12 +80,6 @@
 				},
 				{
 					"include": "#declarations"
-				},
-				{
-					"include": "#static-attribute"
-				},
-				{
-					"include": "#attributes"
 				}
 			]
 		},
@@ -505,7 +505,7 @@
 		},
 
 		"static-attribute": {
-			"begin": "(\\$!([_a-zA-Z](-?[_a-zA-Z\\d])*)?)([ \t]*)(=?)",
+			"begin": "(\\$![_a-zA-Z](-?[_a-zA-Z\\d])*)([ \t]*)*=",
 			"end": ";|}|$",
 			"beginCaptures": {
 				"1": {
