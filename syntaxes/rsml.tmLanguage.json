@@ -505,7 +505,7 @@
 		},
 
 		"static-attribute": {
-			"begin": "(\\$![_a-zA-Z](-?[_a-zA-Z\\d])*)([ \t]*)*=",
+			"begin": "(\\$!([_a-zA-Z](-?[_a-zA-Z\\d])*)?)([ \t]*)(=?)",
 			"end": ";|}|$",
 			"beginCaptures": {
 				"1": {
